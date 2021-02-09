@@ -4,7 +4,7 @@ public class Student {
     private String studentName;  // 属性名要和数据库的列名相同（大小写先不用管）
     private int studentId;
 
-    public Student(String studentName, int studentId){
+    public Student(int studentId, String studentName){
         this.studentId = studentId;
         this.studentName = studentName;
     }

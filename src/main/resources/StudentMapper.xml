@@ -13,7 +13,7 @@
     </select>
 
     <select id="findById" parameterType="int" resultType="com.hezho.bean.Student">
-        selectd * from students where studentId=#{id}
+        select * from students where studentId=#{id}
     </select>
 
     <insert id="insertRecord" parameterType="com.hezho.bean.Student">
