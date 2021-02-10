@@ -16,4 +16,14 @@ public interface StudentDao {
     public int insertRecordByMap(Map map);
 
     public Map<String, Object> findStatics();
+
+    public List<Student> findInList(List<Integer> studentList);
+
+    public List<Student> findInArray(int[] studentArray);
+
+    public List<Student> findInMap(Map studentMap);
+
+    public List<Student> findByAmbigulous(Map map);
+
+    public Student findByStudent(Student student);
 }

@@ -8,7 +8,8 @@
 <mapper namespace="com.hezho.dao.StudentDao">
     <!--id 指的是方法名-->
     <!--resultType用来将查询结果包装-->
-    <select id="getAll" resultType="com.hezho.bean.Student">
+    <!--这里使用了 alias-->
+    <select id="getAll" resultType="student">
         select * from students
     </select>
 
@@ -26,6 +27,41 @@
 
     <select id="findStatics" resultType="map">
         select max(studentId) max, min(studentName) min from students
+    </select>
+
+    <select id="findInList" resultType="student">
+        select * from students where studentId in 
+        <foreach collection="list" item="sid" open="(" close=")" separator=",">
+            #{sid}
+        </foreach>
+    </select>
+
+    <select id="findInArray" resultType="student">
+        select * from students where studentId in
+        <foreach collection="array" item="sid" open="(" close=")" separator=",">
+            #{sid}
+        </foreach>
+    </select>
+
+    <select id="findInMap" resultType="student">
+        select * from students where studentId in
+        <foreach collection="ids" item="sid" open="(" close=")" separator=",">
+            #{sid}
+        </foreach>
+    </select>
+
+    <select id="findByAmbigulous" resultType="student">
+        select * from students where 1 = 1
+        <if test="stuname !=null and stuname !=''">
+            and studentName like "%"#{stuname}"%"
+        </if>
+    </select>
+
+    <select id="findByStudent" resultType="student">
+        select * from students where 1 = 1
+        <if test="studentName !=null and studentName !=''">
+            and studentName like "%"#{studentName}"%"
+        </if>
     </select>
 
 </mapper>
