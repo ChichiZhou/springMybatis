@@ -45,7 +45,7 @@ public class TestMybatis {
         Student student = session.selectOne("com.hezho.dao.StudentDao.findById",1); // 在这里输入查询所需要的参数
         System.out.println(student.getStudentName());
 
-        session.insert("com.hezho.dao.StudentDao.insertRecord", new Student(4,"chenshuaishuai"));
+        session.insert("com.hezho.dao.StudentDao.insertRecord", new Student(4,"chenshuaishuai",3));
         // 做增删改的时候，要使用事务
         session.commit();
 
@@ -62,7 +62,7 @@ public class TestMybatis {
         StudentDao studentDao = session.getMapper(StudentDao.class);
         List<Student> studentList = studentDao.getAll();
         for (Student student:studentList){
-            System.out.println(student.getStudentName());
+            System.out.println(student);
         }
         session.close();
         try {

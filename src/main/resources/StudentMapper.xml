@@ -6,10 +6,18 @@
 <!--namespace="接口的完整路径"-->
 <!--里面的select用来定义sql语句的-->
 <mapper namespace="com.hezho.dao.StudentDao">
+<!--设置缓存-->
+    <cache eviction="FIFO"
+           flushInterval="60000"
+           size="512"
+           readOnly="true"/>
+    <resultMap id="result1" type="com.hezho.bean.Student">
+        <result property="stuId" column="studentId"></result>
+    </resultMap>
     <!--id 指的是方法名-->
     <!--resultType用来将查询结果包装-->
     <!--这里使用了 alias-->
-    <select id="getAll" resultType="student">
+    <select id="getAll" resultType="student" resultMap="result1">
         select * from students
     </select>
 
@@ -62,6 +70,14 @@
         <if test="studentName !=null and studentName !=''">
             and studentName like "%"#{studentName}"%"
         </if>
+    </select>
+
+    <select id="findInRange" resultType="student">
+        select * from students where studentId between #{begin} and #{end}
+    </select>
+
+    <select id="findInRange2" resultType="student">
+        select * from students where studentId >= #{begin} and studentId <![CDATA[<=]]> #{end}
     </select>
 
 </mapper>

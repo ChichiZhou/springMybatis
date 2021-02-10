@@ -26,4 +26,8 @@ public interface StudentDao {
     public List<Student> findByAmbigulous(Map map);
 
     public Student findByStudent(Student student);
+
+    public List<Student> findInRange(Map map);
+
+    public List<Student> findInRange2(Map map);
 }

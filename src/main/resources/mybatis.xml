@@ -8,6 +8,12 @@
         <!--对包起别名之后，类的首字母小写之后即为别名-->
         <package name="com.hezho.bean"/>
     </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+        </plugin>
+    </plugins>
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -22,5 +28,7 @@
     <!-- 指定maper⽂件的路径（maven项⽬从resources源⽂件夹下找资源） -->
     <mappers>
         <mapper resource="StudentMapper.xml"/>
+        <mapper resource="GradMapper.xml"/>
+        <mapper resource="WifeMapper.xml"/>
     </mappers>
 </configuration>

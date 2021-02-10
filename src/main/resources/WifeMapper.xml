@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace="接口的完整路径"-->
+<!--里面的select用来定义sql语句的-->
+<mapper namespace="com.hezho.dao.WifeDao">
+    <!--如果是多表联查，则需要使用 resultMap 才行-->
+    <resultMap id="result4" type="com.hezho.bean.Wife">
+        <id column="wifeId" property="wifeId"></id>
+        <result column="wifeName" property="wifeName"></result>
+        <association property="husband" javaType="com.hezho.bean.Husband">
+            <id column="husbandId" property="husbandId"></id>
+            <result column="husbandName" property="husbandName"></result>
+            <result column="wifeId" property="wifeId"></result>
+        </association>
+    </resultMap>
+
+    <resultMap id="result5" type="com.hezho.bean.Husband">
+        <id column="husbandId" property="husbandId"></id>
+        <result column="husbandName" property="husbandName"></result>
+        <result column="wifeId" property="wifeId"></result>
+        <association property="wife" javaType="com.hezho.bean.Wife">
+            <id column="wifeId" property="wifeId"></id>
+            <result column="wifeName" property="wifeName"></result>
+        </association>
+
+    </resultMap>
+
+    <select id="findByWifeId" resultMap="result5">
+        select * from wife as w, husband as h
+        where w.wifeId=h.wifeId and w.wifeId=#{id}
+    </select>
+
+    <select id="findByHusbandId" resultMap="result4">
+        select * from wife as w, husband as h
+        where w.wifeId=h.wifeId and h.husbandId=#{id}
+    </select>
+
+</mapper>
